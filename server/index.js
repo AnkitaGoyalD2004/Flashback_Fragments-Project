@@ -11,3 +11,15 @@ app.use(cors());
 const CONNECTION_URL =
   "mongodb+srv://Dishu01:Abhay@1_@cluster0.kr6sa5z.mongodb.net/";
 const PORT = process.env.PORT || 5000;
+
+moongoose
+  .connect(CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(PORT, () => console.log(`server running on port : ${PORT}`))
+  )
+  .catch((error = console.log(error.message)));
+
+mongoose.set("useFindAndModify", false);
