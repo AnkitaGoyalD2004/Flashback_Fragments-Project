@@ -17,8 +17,6 @@ app.use(express.urlencoded({ limit: "30mb", extended: "true" }));
 
 app.use("/posts", postRouter);
 
-//change the location of the connection url , store it in the env file
-
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDb");
   app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
