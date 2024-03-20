@@ -6,4 +6,16 @@ const postSchema = mongoose.Schema({
   creator: String,
   tags: [String],
   selectedFile: String,
+  likeCount: {
+    type: Number,
+    default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
+
+// convert our schema into a model
+const PostMessage = mongoose.model("PostMessage", postSchema);
+export default PostMessage;
