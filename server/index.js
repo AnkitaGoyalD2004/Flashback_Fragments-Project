@@ -16,9 +16,8 @@ app.use(express.json({ limit: "30mb", extended: "true" }));
 app.use(express.urlencoded({ limit: "30mb", extended: "true" }));
 
 app.use("/posts", postRouter);
-const CONNECTION_URL =
-  "mongodb+srv://Dishu01:Abhay@1_@cluster0.kr6sa5z.mongodb.net/";
-mongoose.connect(CONNECTION_URL);
+
+//change the location of the connection url , store it in the env file
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDb");
