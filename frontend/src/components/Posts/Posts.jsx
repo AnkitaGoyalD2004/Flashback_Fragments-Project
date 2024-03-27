@@ -1,5 +1,5 @@
 import React from "react";
-import SinglePosts from "../singlePosts/singlePosts";
+import SinglePosts from "../SinglePosts/SinglePosts";
 const Posts = () => {
   return (
     <div>
