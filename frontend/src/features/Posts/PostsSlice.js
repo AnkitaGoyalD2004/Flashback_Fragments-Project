@@ -1,0 +1,1 @@
+export default PostsSlice.reducer;

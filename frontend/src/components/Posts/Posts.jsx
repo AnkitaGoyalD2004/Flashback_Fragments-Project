@@ -5,6 +5,7 @@ const Posts = () => {
     <>
       <h1>Posts</h1>
       <SinglePosts></SinglePosts>
+      <SinglePosts></SinglePosts>
     </>
   );
 };
