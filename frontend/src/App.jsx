@@ -1,17 +1,16 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import React from "react";
-import Form from "./components/Form/Form";
-import Posts from "./components/Posts/Posts";
-import memories from "./images/image.png";
-import NavBar from "./components/NavBar/NavBar";
+import { Home } from "./Pages";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home></Home>,
+  },
+]);
+
 const App = () => {
-  return (
-    <div>
-      <h1>App</h1>
-      <NavBar />
-      <img src={memories} alt="memories" height="60" />.
-      <Form />
-      <Posts />
-    </div>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 };
+
 export default App;

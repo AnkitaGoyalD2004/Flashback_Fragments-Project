@@ -1,11 +1,14 @@
-import NavBar from "../components/NavBar/NavBar";
+import { NavBar } from "../../src/components";
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-const home = () => {
+const Home = () => {
   return (
-    <div>
-      <NavBar />
+    <div maxWidth="lg">
+      <NavBar></NavBar>
+      <Outlet></Outlet>
     </div>
   );
 };
 
-export default home;
+export default Home;
