@@ -1,8 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import PostsSlice from "./features/Posts/PostsSlice";
-import UserSlice from "./features/User/UserSlice";
+//import the reducers over here
+import postsReducer from "./features/Posts/PostsSlice";
+import userReducer from "./features/User/UserSlice";
 
 export const store = configureStore({
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({}),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  reducer: {
+    postsState: postsReducer,
+    userState: userReducer,
+  },
 });
