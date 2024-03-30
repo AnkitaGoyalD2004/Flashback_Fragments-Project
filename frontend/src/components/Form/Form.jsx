@@ -1,4 +1,4 @@
-import { Form, Input, Textarea, Button, Alert } from "daisyui";
+import { Form, Input, Textarea, Button, Alert, Paper } from "daisyui";
 import { convertBase64 } from "../../utils/index";
 import "./style.css";
 
@@ -17,17 +17,39 @@ const Form = () => {
     selectedFile: "",
   });
 
-  const clear = () => {
-    setPostData({
-      creator: "",
-      title: "",
-      message: "",
-      tags: "",
-      selectedFile: "",
-    });
-  };
+  const { posts, currentPostI } = useSelector((state) => {
+    return state.postData;
+  });
 
-  return;
+  const handleSubmit = () => {};
+
+  return (
+    <Paper>
+      <form
+        className="form"
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit}
+      >
+        <Grid alignItems="center">
+          <Grid item>
+            <Typography variant="h6"></Typography>
+          </Grid>
+
+          <Grid item>
+            <TextField>
+              name="creator" variant="outlined" label="Creator" value=
+              {postData.creator}
+              onChange=
+              {(event) => {
+                setPostData({ ...postData, creator: EventTarget.target.value });
+              }}
+            </TextField>
+          </Grid>
+        </Grid>
+      </form>
+    </Paper>
+  );
 };
 
 export default Form;
