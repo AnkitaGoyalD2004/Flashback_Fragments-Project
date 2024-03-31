@@ -1,29 +1,20 @@
-import { AppBar, Typography, Toolbar } from "daisyui";
+import { Toolbar as DaisyToolbar, Button } from "daisyui";
 
-// MyAppBar
-export const MyAppBar = (props) => (
-  <AppBar
-    className={`rounded-lg mt-30 mb-30 flex items-center justify-between px-10 py-4`}
-    {...props} // Pass any additional props to the AppBar component
-  >
-    {/* AppBar content */}
-  </AppBar>
-);
+function MyAppBar() {
+  return (
+    <header className="bg-base-100 rounded-lg px-4 py-2 my-4 mx-auto max-w-7xl">
+      <DaisyToolbar justify="space-between">
+        <div className="flex items-center space-x-4"></div>
+        <Button variant="outline">Action</Button>
+      </DaisyToolbar>
+    </header>
+  );
+}
 
-// MyTypography
-export const MyTypography = (props) => (
-  <Typography
-    className={`text-sky-500 decoration-none`}
-    {...props} // Pass any additional Typography props
-  >
-);
-
-// MyToolbar
-export const MyToolbar = (props) => (
-  <Toolbar
-    className={`flex justify-end w-400`}
-    {...props} // Pass any additional Toolbar props
-  >
-    {/* Toolbar content */}
-  </Toolbar>
-);
+function MyTypography({ children, ...otherProps }) {
+  return (
+    <h1 className="text-blue-500 text-lg font-medium" {...otherProps}>
+      {children}
+    </h1>
+  );
+}
