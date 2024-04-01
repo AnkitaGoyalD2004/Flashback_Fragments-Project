@@ -1,21 +1,34 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import React from "react";
-import { Home } from "./Pages";
-import { Posts } from "./components";
+import { Home, Error, Landing, Auth } from "./pages";
+import { ErrorComp } from "./components2";
+import { store } from "./store";
+import { postsLoader } from "./utils/Loaders";
+import { loginUserAction } from "./utils/actions";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        index: true,
+        loader: postsLoader(store),
+        element: <Landing></Landing>,
+        errorElement: <ErrorComp></ErrorComp>,
+      },
+      {
+        path: "/auth",
+        element: <Auth></Auth>,
+        errorElement: <ErrorComp></ErrorComp>,
+        action: loginUserAction(store),
+      },
+    ],
   },
 ]);
 
 const App = () => {
-  return (
-    <RouterProvider router={router}>
-      <Posts></Posts>
-    </RouterProvider>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 };
 
 export default App;
