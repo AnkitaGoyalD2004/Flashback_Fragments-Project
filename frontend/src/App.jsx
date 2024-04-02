@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home, Error, Landing, Auth } from "./pages";
-import { ErrorComp } from "./components2";
+import { ErrorComp } from "./components";
 import { store } from "./store";
 import { postsLoader } from "./utils/Loaders";
 import { loginUserAction } from "./utils/actions";
