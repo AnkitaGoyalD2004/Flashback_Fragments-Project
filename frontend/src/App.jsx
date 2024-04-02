@@ -1,34 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Error, Landing, Auth } from "./pages";
-import { ErrorComp } from "./components";
-import { store } from "./store";
-import { postsLoader } from "./utils/Loaders";
-import { loginUserAction } from "./utils/actions";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home></Home>,
-    errorElement: <Error></Error>,
-    children: [
-      {
-        index: true,
-        loader: postsLoader(store),
-        element: <Landing></Landing>,
-        errorElement: <ErrorComp></ErrorComp>,
-      },
-      {
-        path: "/auth",
-        element: <Auth></Auth>,
-        errorElement: <ErrorComp></ErrorComp>,
-        action: loginUserAction(store),
-      },
-    ],
-  },
-]);
+import Form from "./components/Form";
 
 const App = () => {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <RouterProvider>
+      <Form />
+    </RouterProvider>
+  );
 };
 
 export default App;
