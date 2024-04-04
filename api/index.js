@@ -11,7 +11,7 @@ mongoose
     console.log("MongoDB is connected");
   })
   .catch((err) => {
-    console.log(err);
+    console.error(err);
   });
 
 const app = express();
