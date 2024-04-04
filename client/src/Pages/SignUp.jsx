@@ -1,7 +1,30 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 export default function SignUp() {
+  const [formData, setFormData] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      // Handle successful response (data)
+    } catch (error) {
+      console.error("Error during signup:", error);
+      // Optionally throw a new error for higher-level handling
+    }
+  };
+
   return (
     <div className="  items-center min-h-screen mt-10 ">
       <div
@@ -18,19 +41,34 @@ export default function SignUp() {
           </Link>
         </div>
         {/* Right */}
-        <div className="">
-          <form className="flex flex-col gap-4">
+        <div className="flex-1">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
               <Label value="Your username" />
-              <TextInput type="text" placeholder="Username" id="username" />
+              <TextInput
+                type="text"
+                placeholder="Username"
+                id="username"
+                onChange={handleChange}
+              />
             </div>
             <div>
               <Label value="Your email" />
-              <TextInput type="text" placeholder="Email" id="email" />
+              <TextInput
+                type="text"
+                placeholder="Email"
+                id="email"
+                onChange={handleChange}
+              />
             </div>
             <div>
               <Label value="Your Password" />
-              <TextInput type="text" placeholder="Password" id="password" />
+              <TextInput
+                type="text"
+                placeholder="Password"
+                id="password"
+                onChange={handleChange}
+              />
             </div>
             <Button gradientDuoTone="purpleToPink" type="submit">
               Sign Up
