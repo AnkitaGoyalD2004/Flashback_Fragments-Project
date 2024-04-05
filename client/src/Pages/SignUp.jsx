@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 export default function SignUp() {
   const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -21,7 +23,6 @@ export default function SignUp() {
       // Handle successful response (data)
     } catch (error) {
       console.error("Error during signup:", error);
-      // Optionally throw a new error for higher-level handling
     }
   };
 
