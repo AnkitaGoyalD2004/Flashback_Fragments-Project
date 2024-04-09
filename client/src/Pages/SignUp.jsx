@@ -1,33 +1,48 @@
-import { Button, Label, TextInput } from "flowbite-react";
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import React, { useState } from "react"; // Correct hook import
+import { Link, useNavigate } from "react-router-dom";
+
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.username || !formData.email || !formData.password) {
+      return setErrorMessage("Please fill out all fields");
+    }
     try {
+      setLoading(true);
+      setErrorMessage(null);
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-
-      // Handle successful response (data)
+      if (!data.success) {
+        // Check for successful API response (data.success)
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if (res.ok) {
+        navigate("/sign-in"); // Redirect to sign-in on success
+      }
+      // Handle additional successful response logic (e.g., display success message)
     } catch (error) {
-      console.error("Error during signup:", error);
+      setErrorMessage(error.message);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="  items-center min-h-screen mt-10 ">
+    <div className="items-center min-h-screen mt-10 ">
       <div
         className="self-center flex p-3 max-w-3xl mx-auto
       flex-col  md:flex-row items-center"
@@ -56,7 +71,7 @@ export default function SignUp() {
             <div>
               <Label value="Your email" />
               <TextInput
-                type="text"
+                type="email" // Use type="email" for email input
                 placeholder="Email"
                 id="email"
                 onChange={handleChange}
@@ -65,14 +80,25 @@ export default function SignUp() {
             <div>
               <Label value="Your Password" />
               <TextInput
-                type="text"
+                type="password"
                 placeholder="Password"
                 id="password"
                 onChange={handleChange}
               />
             </div>
-            <Button gradientDuoTone="purpleToPink" type="submit">
-              Sign Up
+            <Button
+              gradientDuoTone="purpleToPink"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">loading...</span>
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </Button>
           </form>
           <div className="flex p-4 gap-2 text-sm ">
@@ -81,6 +107,11 @@ export default function SignUp() {
               Sign In
             </Link>
           </div>
+          {errorMessage && (
+            <Alert className="mt-5" color="failure">
+              {errorMessage}
+            </Alert>
+          )}
         </div>
       </div>
     </div>
