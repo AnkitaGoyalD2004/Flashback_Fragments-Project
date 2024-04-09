@@ -97,7 +97,7 @@ export default function SignUp() {
                   <span className="pl-3">loading...</span>
                 </>
               ) : (
-                "Sign Up"
+                "Create Account"
               )}
             </Button>
           </form>

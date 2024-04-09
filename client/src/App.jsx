@@ -9,6 +9,7 @@ import DashBoard from "./Pages/DashBoard";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Projects from "./Pages/Projects";
+import FooterComp from "./components/FooterComp";
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
+      <FooterComp />
     </BrowserRouter>
   );
 }
