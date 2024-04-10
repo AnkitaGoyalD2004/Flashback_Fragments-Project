@@ -26,14 +26,12 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (!data.success) {
+      if (!data.ok) {
         // Check for successful API response (data.success)
         return setErrorMessage(data.message);
       }
       setLoading(false);
-      if (res.ok) {
-        navigate("/sign-in"); // Redirect to sign-in on success
-      }
+      navigate("/sign-in"); // Redirect to sign-in on success
       // Handle additional successful response logic (e.g., display success message)
     } catch (error) {
       setErrorMessage(error.message);
