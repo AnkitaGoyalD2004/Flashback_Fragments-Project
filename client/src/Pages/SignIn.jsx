@@ -1,11 +1,18 @@
-import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
-import React, { useState } from "react"; // Correct hook import
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInSuccess,
+  signInFailure,
+  signInStart,
+} from "../redux/user/userSlice";
 
 export default function SignIn() {
-  const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "" }); // Set initial values to avoid potential errors
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -14,31 +21,31 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form data before dispatching actions
     if (!formData.email || !formData.password) {
-      return setErrorMessage("Please fill out all fields");
+      dispatch(signInFailure("Please fill out all fields"));
+      // Prevent further execution if validation fails
     }
+
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      console.log(res);
-      const data = res.json();
-      if (!data.ok) {
-        // Check for successful API response (data.success)
-        return setErrorMessage(data.message);
-      } else {
-        setLoading(false);
+      const data = await res.json();
 
-        navigate("/"); // Redirect to sign-in on success
-        // Handle additional successful response logic (e.g., display success message)
+      if (data.success === false) {
+        // Use exclamation mark for clarity
+        dispatch(signInFailure(data.message));
+      } else {
+        dispatch(signInSuccess(data));
+        navigate("/");
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -67,6 +74,7 @@ export default function SignIn() {
                 placeholder="Email"
                 id="email"
                 onChange={handleChange}
+                value={formData.email} // Set value from state
               />
             </div>
             <div>
@@ -76,6 +84,7 @@ export default function SignIn() {
                 placeholder="Password"
                 id="password"
                 onChange={handleChange}
+                value={formData.password} // Set value from state
               />
             </div>
             <Button

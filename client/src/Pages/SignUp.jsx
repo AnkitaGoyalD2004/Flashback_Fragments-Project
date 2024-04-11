@@ -26,7 +26,7 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (!data.ok) {
+      if (data.success === false) {
         // Check for successful API response (data.success)
         return setErrorMessage(data.message);
       }
