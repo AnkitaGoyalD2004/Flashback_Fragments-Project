@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   signInSuccess,
   signInFailure,
   signInStart,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: "", password: "" }); // Set initial values to avoid potential errors
@@ -51,7 +53,8 @@ export default function SignIn() {
   };
 
   return (
-    <div className="items-center min-h-screen mt-10 ">
+    <GoogleOAuthProvider clientId="">
+      {/* center min-h-screen mt-10  */}
       <div
         className="self-center flex p-3 max-w-3xl mx-auto
       flex-col  md:flex-row items-center"
@@ -118,6 +121,6 @@ export default function SignIn() {
           )}
         </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
 }

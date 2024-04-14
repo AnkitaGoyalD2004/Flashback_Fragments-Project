@@ -1,16 +1,24 @@
-import React from "react";
-import { AiFillGoogleCircle } from "react-icons/ai";
-import { Button } from "flowbite-react";
-export default function OAuth() {
+import { GoogleLogin } from "@react-oauth/google";
+
+const OAuth = () => {
+  const onSuccess = (response) => {
+    console.log("Login Success:", response);
+    // Send the access token to your backend for verification
+  };
+
+  const onFail = (error) => {
+    console.error("Login Failed:", error);
+  };
+
   return (
-    <Button
-      type="button"
-      gradientDuoTone="pinkToOrange"
-      outline
-      onClick={handleGoogleClick}
-    >
-      <AiFillGoogleCircle className="w-6 h-6 mr-2" />
-      Continue With Google
-    </Button>
+    <div>
+      <GoogleLogin
+        clientId="YOUR_CLIENT_ID"
+        onSuccess={onSuccess}
+        onFailure={onFail}
+      />
+    </div>
   );
-}
+};
+
+export default OAuth;
