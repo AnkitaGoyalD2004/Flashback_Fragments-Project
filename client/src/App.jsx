@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+//to implement lazy loading
+import { lazy, Suspense } from "react";
 
 import Header from "./components/Header";
 
@@ -9,7 +11,10 @@ import DashBoard from "./Pages/DashBoard";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Projects from "./Pages/Projects";
-import FooterComp from "./components/FooterComp";
+//import FooterComp from "./components/FooterComp";
+
+const Myfootercomp = lazy(() => import("./components/FooterComp"));
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,7 +27,9 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
-      <FooterComp />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Myfootercomp />
+      </Suspense>
     </BrowserRouter>
   );
 }
