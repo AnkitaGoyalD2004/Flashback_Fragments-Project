@@ -50,7 +50,7 @@ export default function Header() {
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm"> {currentUser.username}</span>
+              <span className="block text-sm">@{currentUser.username}</span>
               <span className="block text-sm font-medium truncate">
                 {currentUser.email}
               </span>
@@ -68,11 +68,6 @@ export default function Header() {
             </Button>
           </Link>
         )}
-        {/* <Link to="/sign-in">
-          <Button gradientDuoTone="purpleToPink" outline>
-            Sign In
-          </Button>
-        </Link> */}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>

@@ -89,23 +89,20 @@ export default function SignIn() {
                 value={formData.password} // Set value from state
               />
             </div>
-            <Button
-              gradientDuoTone="purpleToPink"
-              type="submit"
-              disabled={loading}
             >
+            <Button gradientDuoTone="purpleToPink" type="submit">
               {loading ? (
                 <>
                   <Spinner size="sm" />
-                  <span className="pl-3">loading...</span>
+                  <span className="pl-3">Loading...</span>
                 </>
               ) : (
-                "Login"
+                "Sign In"
               )}
             </Button>
           </form>
-          <div className="flex p-4 gap-2 text-sm ">
-            <span>Don't have an Account</span>
+          <div className="flex gap-2 text-sm mt-5">
+            <span>Dont Have an account?</span>
             <Link to="/sign-up" className="text-blue-500">
               Sign Up
             </Link>
