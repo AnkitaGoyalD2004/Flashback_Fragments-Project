@@ -10,7 +10,9 @@ import About from "./Pages/About";
 import DashBoard from "./Pages/DashBoard";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
+import PrivateRoute from "./components/PrivateRoute";
 import Projects from "./Pages/Projects";
+// import PrivateRoute from "./components/PrivateRoute";
 //import FooterComp from "./components/FooterComp";
 
 const Myfootercomp = lazy(() => import("./components/FooterComp"));
@@ -22,8 +24,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/dashboard" element={<DashBoard />} />
+
         <Route path="/sign-in" element={<SignIn />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<DashBoard />} />
+        </Route>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
