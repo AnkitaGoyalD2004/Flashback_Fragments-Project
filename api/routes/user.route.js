@@ -1,8 +1,10 @@
-// import express from "express";
-// import { test } from "../controllers/user.controller.js";
-// const router = express.Router();
+import express from "express";
+import { test } from "../controllers/user.controller.js";
+import { updateUser } from "../controllers/user.controller.js";
 
-// router.get("/test", test);
-// router.put("/update:userId", updateUser);
+const router = express.Router();
 
-// export default router;
+router.get("/test", test);
+router.put("/update:userId", updateUser);
+
+export default router;
