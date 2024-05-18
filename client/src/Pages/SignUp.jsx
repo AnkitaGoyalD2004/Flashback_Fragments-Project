@@ -31,8 +31,10 @@ export default function SignUp() {
         return setErrorMessage(data.message);
       }
       setLoading(false);
-      navigate("/sign-in"); // Redirect to sign-in on success
-      // Handle additional successful response logic (e.g., display success message)
+      if (res.ok) {
+        navigate("/sign-in"); // Redirect to sign-in on success
+        // Handle additional successful response logic (e.g., display success message)
+      }
     } catch (error) {
       setErrorMessage(error.message);
       setLoading(false);
