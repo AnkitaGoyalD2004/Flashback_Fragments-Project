@@ -1,6 +1,6 @@
-import jwt, { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { errorHandler } from "./error";
-const verifyToken = (req, res, next) => {
+export const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
 
   if (!token) {
@@ -14,4 +14,3 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
-export default verifyUser;
